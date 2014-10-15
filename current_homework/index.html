@@ -20,5 +20,25 @@
   </head>
   <body>
     <div id="map-canvas"></div>
+    <script>
+       var myRequest = new XMLHttpRequest();
+       var result = "";
+       myRequest.open("GET", "http://developer.mbta.com/lib/rthr/red.json", true);
+       
+       setInterval(function myFunction(), 5000); 
+       myRequest.onreadystatechange = myFunction();
+       function myFunction{ 
+       if(myRequest.readyState == 4 && myRequest.status == 200){  
+           data = JSON.parse(myRequest.responseText);
+           for(i = 0; i < data.length; i++){
+               var latlng = new google.maps.LatLng(data[i]["Lat"], data[i]["Long"]);
+               var marker = new google.maps.Marker({position: latlng, map: map});
+               marker.setMap(map);
+           }
+        }
+          
+       };
+       myRequest.send();
+    </script>
   </body>
 </html>

@@ -7,43 +7,91 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi1XWg6204cWkmi1cHnD9cqzFd1llj1T0">
     </script>
     <script type="text/javascript">
-      if(navigator.geolocation){
-        var myLat = position.coords.latitude;
-        var myLong = position.coords.longitude;}
-      else {
-        error("Geo Location is not supported");}
-      function initialize() {
-        var mapOptions = {
-          center: { lat: myLat, lng: myLong}, //centered on current position
-          zoom: 10
+
+        var myLat = 0;
+        var myLng = 0;
+        var request = new XMLHttpRequest();
+        var me = new google.maps.LatLng(myLat, myLng);
+        var myOptions = {
+                zoom: 13,
+                center: me,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-    <script>
-       var myRequest = new XMLHttpRequest();
-       var result = "";
-       myRequest.open("GET", "http://developer.mbta.com/lib/rthr/red.json", true);
-       
-       setInterval(function myFunction(), 5000); 
-       myRequest.onreadystatechange = myFunction();
-       function myFunction{ 
-       if(myRequest.readyState == 4 && myRequest.status == 200){  
-           data = JSON.parse(myRequest.responseText);
-           for(i = 0; i < data.length; i++){
-               var latlng = new google.maps.LatLng(data[i]["Lat"], data[i]["Long"]);
-               var marker = new google.maps.Marker({position: latlng, map: map});
-               marker.setMap(map);
-           }
+        var map;
+        var marker;
+        var infowindow = new google.maps.InfoWindow();
+        var places;
+        
+        function init()
+        {
+                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                getMyLocation();
         }
-          
-       };
-       myRequest.send();
-    </script>
-  </body>
+        
+        function getMyLocation()
+        {
+                if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                                myLat = position.coords.latitude;
+                                myLng = position.coords.longitude;
+                                renderMap();});
+                }
+                else {
+                        alert("Geolocation is not supported by your web browser.");
+                }
+        }
+        function renderMap()
+        {
+                me = new google.maps.LatLng(myLat, myLng);
+                // Update map and go there...
+                map.panTo(me);
+                // Create a marker
+                marker = new google.maps.Marker({
+                position: me,
+                title: "Here I Am!"
+                });
+                marker.setMap(map);
+                // Open info window on click of marker
+                google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(marker.title);
+                        infowindow.open(map, marker);
+                });
+                // Calling Google Places API
+                var request = {
+                location: me,
+                radius: '500',
+                types: ['food']
+                };
+                service = new google.maps.places.PlacesService(map);
+                service.search(request, callback);
+        }
+
+        function callback(results, status)
+        {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        alert("Got places back!");
+                        places = results;
+                        for (var i = 0; i < results.length; i++) {
+                                createMarker(results[i]);
+                        }
+                }
+        }
+        function createMarker(place)
+        {
+                var placeLoc = place.geometry.location;
+                var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                });
+                google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.close();
+                        infowindow.setContent(place.name);
+                        infowindow.open(map, this);
+                        });
+        }
+        </script>
+      </head>
+   <body onload="init()">
+      <div id="map_canvas"></div>
+   </body>
 </html>

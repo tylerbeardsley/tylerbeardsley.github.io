@@ -6,10 +6,13 @@
     <script type = "text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi1XWg6204cWkmi1cHnD9cqzFd1llj1T0">
     </script>
+    <script type = "text/javascript"
+      src = "http://chickenofthesea.herokuapp.com/sendLocation">
+    </script>
     <script type="text/javascript">
 
-        var myLat = 0;
-        var myLng = 0;
+        var myLat = 0.0;
+        var myLng = 0.0;
         var request = new XMLHttpRequest();
         var me = new google.maps.LatLng(myLat, myLng);
         var myOptions = {
@@ -19,6 +22,7 @@
         };
         var map;
         var marker;
+        var myImage = 'shield_PNG1279.png';
         var infowindow = new google.maps.InfoWindow();
         var places;
         
@@ -48,7 +52,8 @@
                 // Create a marker
                 marker = new google.maps.Marker({
                 position: me,
-                title: "Here I Am!"
+                title: "WendyTestaburger"
+                icon: myImage
                 });
                 marker.setMap(map);
                 // Open info window on click of marker

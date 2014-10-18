@@ -6,9 +6,6 @@
     <script type = "text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi1XWg6204cWkmi1cHnD9cqzFd1llj1T0">
     </script>
-    <script type = "text/javascript"
-      src = "http://chickenofthesea.herokuapp.com/sendLocation">
-    </script>
     <script type="text/javascript">
 
         var myLat = 0.0;
@@ -22,7 +19,7 @@
         };
         var map;
         var marker;
-        var myImage = 'shield_PNG1279.png';
+        var myImage = document.getElementById("shield").src;
         var infowindow = new google.maps.InfoWindow();
         var places;
         
@@ -97,6 +94,7 @@
         </script>
       </head>
    <body onload="init()">
+      <img id="shield" src="shield_PNG1279.png" alt="Cap's Shield">
       <div id="map_canvas"></div>
    </body>
 </html>

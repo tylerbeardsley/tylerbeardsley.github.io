@@ -19,7 +19,7 @@
         };
         var map;
         var marker;
-        var myImage = document.getElementById("shield").src;
+        var myImage = 'shield_PNG1279.png';
         var infowindow = new google.maps.InfoWindow();
         var places;
         
@@ -49,7 +49,7 @@
                 // Create a marker
                 marker = new google.maps.Marker({
                 position: me,
-                title: "WendyTestaburger"
+                title: "WendyTestaburger",
                 icon: myImage
                 });
                 marker.setMap(map);
@@ -94,7 +94,6 @@
         </script>
       </head>
    <body onload="init()">
-      <img id="shield" src="shield_PNG1279.png" alt="Cap's Shield">
       <div id="map_canvas"></div>
    </body>
 </html>

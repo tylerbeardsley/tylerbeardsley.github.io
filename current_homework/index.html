@@ -10,7 +10,7 @@
 
         var myLat = 0.0;
         var myLng = 0.0;
-        var request = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
         var me = new google.maps.LatLng(myLat, myLng);
         var myOptions = {
                 zoom: 13,
@@ -58,6 +58,19 @@
                         infowindow.setContent(marker.title);
                         infowindow.open(map, marker);
                 });
+
+                // Send info to herokuapp
+                xhr.open("post", "http://chickenofthesea.herokuapp.com/sendLocation", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                     if (xhr.readyState == 4 && xhr.status == 200){
+                           data = xhr.responseText;
+                           // should get all entries of students and characters 
+                           // document.getElementById("list").innerHTML = data;
+                     }
+                };
+                xhr.send("WendyTestaburger", myLat, myLng);
+
                 // Calling Google Places API
                 var request = {
                 location: me,

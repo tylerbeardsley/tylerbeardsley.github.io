@@ -74,11 +74,9 @@
                            parsed = JSON.parse(data);
                            //check characters
                            for (i = 0; i < 6; i++){
-                              charName = parsed['characters'][i];
-                              checkCharacter(charName);
-                              //make function to check Character and do stuff 
+                              checkCharacter(parsed['characters'][i]);
                            }
-                           // should get all entries of students and characters 
+                           // check students 
                            // need to JSON parse through data and then take info to add markers
                      }
                 };

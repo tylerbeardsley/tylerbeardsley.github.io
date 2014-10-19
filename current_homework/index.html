@@ -113,7 +113,7 @@
                 var loc = new google.maps.LatLng(character.loc["latitude"], character.loc["longitude"]);
                 var marker = new google.maps.Marker({
                         map: map,
-                        position: loc
+                        position: loc,
                         icon: image
                 });
                 google.maps.event.addListener(marker, 'click', function() {

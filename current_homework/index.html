@@ -20,6 +20,12 @@
         var map;
         var marker;
         var myImage = "41oIHuQ21ML._SS36_.jpg";
+        var carmen = "carmen.png";
+        var batman = "batman.png";
+        var nr = "Norman_Ramsey.png";
+        var hescott = "hescott.png";
+        var snape = "snape.png";
+        var waldo = "waldo.png";
         var infowindow = new google.maps.InfoWindow();
         var places;
         
@@ -82,30 +88,23 @@
         
         function checkCharacter(character)
         {
-                var image;
                 if (character.name == "carmen"){
-                   image = "carmen.png";
-                   createMarker(character, image);
+                   createMarker(character, carmen);
                 }
                 if (character.name == "waldo"){
-                   image = "waldo.png";
-                   createMarker(character, image);
+                   createMarker(character, waldo);
                 }
                 if (character.name == "batman"){
-                   image = "batman.png";
-                   createMarker(character, image);
+                   createMarker(character, batman);
                 }
                 if (character.name == "nr"){
-                   image = "Norman_Ramsey.png";
-                   createMarker(character, image);
+                   createMarker(character, nr);
                 }
                 if (character.name == "snape"){
-                   image = "snape.png";
-                   createMarker(character, image);
+                   createMarker(character, snape);
                 }
                 if (character.name == "hescott"){
-                   image = "hescott.png";
-                   createMarker(character, image);
+                   createMarker(character, hescott);
                 }
         }
 

@@ -65,42 +65,61 @@
                 xhr.onreadystatechange = function() {
                      if (xhr.readyState == 4 && xhr.status == 200){
                            data = xhr.responseText;
+                           parsed = JSON.parse(data);
+                           //check characters
+                           for (i = 0; i < 6; i++){
+                              charName = parsed['characters'][i];
+                              checkCharacter(charName);
+                              //make function to check Character and do stuff 
+                           }
                            // should get all entries of students and characters 
-                           // document.getElementById("list").innerHTML = data;
+                           // need to JSON parse through data and then take info to add markers
                      }
                 };
                 xhr.send("login=WendyTestaburger&lat="+myLat+"&lng="+myLng);
 
-                // Calling Google Places API
-                var request = {
-                location: me,
-                radius: '500',
-                types: ['food']
-                };
-                service = new google.maps.places.PlacesService(map);
-                service.search(request, callback);
         }
-
-        function callback(results, status)
+        
+        function checkCharacter(character)
         {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        alert("Got places back!");
-                        places = results;
-                        for (var i = 0; i < results.length; i++) {
-                                createMarker(results[i]);
-                        }
+                var image;
+                if (character.name == "carmen"){
+                   image = "carmen.png";
+                   createMarker(character, image);
+                }
+                if (character.name == "waldo"){
+                   image = "waldo.png";
+                   createMarker(character, image);
+                }
+                if (character.name == "batman"){
+                   image = "batman.png";
+                   createMarker(character, image);
+                }
+                if (character.name == "nr"){
+                   image = "Norman_Ramsey.png";
+                   createMarker(character, image);
+                }
+                if (character.name == "snape"){
+                   image = "snape.png";
+                   createMarker(character, image);
+                }
+                if (character.name == "hescott"){
+                   image = "hescott.png";
+                   createMarker(character, image);
                 }
         }
-        function createMarker(place)
+
+        function createMarker(character, image)
         {
-                var placeLoc = place.geometry.location;
+                var loc = new google.maps.LatLng(character.loc["latitude"], character.loc["longitude"]);
                 var marker = new google.maps.Marker({
                         map: map,
-                        position: place.geometry.location
+                        position: loc
+                        icon: image
                 });
                 google.maps.event.addListener(marker, 'click', function() {
                         infowindow.close();
-                        infowindow.setContent(place.name);
+                        infowindow.setContent("Name: " + character.name + "<p> Lat: " + character.loc["latitude"] + "</p> <p> Lng: " + character.loc["longitude"] + "</p> <p> Note: " + character.note + "</p>");
                         infowindow.open(map, this);
                         });
         }

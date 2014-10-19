@@ -73,8 +73,9 @@
                            data = xhr.responseText;
                            parsed = JSON.parse(data);
                            //check characters
-                           for (i = 0; i < 6; i++){
-                              checkCharacter(parsed['characters'][i]);
+                           for (i = 0; i < parsed["characters"].length; i++){
+                              console.log(parsed["characters"][i]["name"];
+                              checkCharacter(parsed["characters"][i]);
                            }
                            // check students 
                            // need to JSON parse through data and then take info to add markers

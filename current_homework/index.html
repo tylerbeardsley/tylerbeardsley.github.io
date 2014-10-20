@@ -79,6 +79,9 @@
                               checkCharacter(parsed["characters"][i]);
                            }
                            // check students 
+                           for (i = 0; i < parsed["students"].length; i++){
+                              createStudentMarker(parsed["students"][i], );
+                           }
                            // need to JSON parse through data and then take info to add markers
                      }
                 };
@@ -88,7 +91,6 @@
         
         function checkCharacter(character)
         {
-                console.log(character["name"]);
                 if (character["name"] == "carmen"){
                    createMarker(character, carmen);
                 }
@@ -119,7 +121,21 @@
                 });
                 google.maps.event.addListener(newMarker, 'click', function() {
                         infowindow.close();
-                        infowindow.setContent("Name: " + character["name"] + "<p> Lat: " + character["loc"]["latitude"] + "</p> <p> Lng: " + character["loc"]["longitude"] + "</p> <p> Note: " + character["note"] + "</p>");
+                        infowindow.setContent("Name: " + character["name"] + "<p> Lat: " + character["loc"]["latitude"] + "</p> <p> Lng: " + character["loc"]["longitude"] + "</p> <p> Note: " + character["loc"]["note"] + "</p>");
+                        infowindow.open(map, this);
+                        });
+        }
+       
+        function createStudentMarker(character)
+        {
+                var loc = new google.maps.LatLng(character["lat"], character["lng"]);
+                var newMarker = new google.maps.Marker({
+                        map: map,
+                        position: loc,
+                });
+                google.maps.event.addListener(newMarker, 'click', function() {
+                        infowindow.close();
+                        infowindow.setContent("Login: " + character["login"] + "<p> Lat: " + character["lat"] + "</p> <p> Lng: " + character["lng"] + "</p> <p> Timestamp: " + character["created_at"] + "</p>");
                         infowindow.open(map, this);
                         });
         }

@@ -28,6 +28,8 @@
         var waldo = "waldo.png";
         var infowindow = new google.maps.InfoWindow();
         var places;
+        var data;
+        var parsed;
         
         function init()
         {
@@ -74,6 +76,7 @@
                            parsed = JSON.parse(data);
                            //check characters
                            for (i = 0; i < parsed["characters"].length; i++){
+                              console.log(parsed["characters"][i]);
                               checkCharacter(parsed["characters"][i]);
                            }
                            // check students 

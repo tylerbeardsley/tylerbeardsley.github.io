@@ -76,7 +76,6 @@
                            parsed = JSON.parse(data);
                            //check characters
                            for (i = 0; i < parsed["characters"].length; i++){
-                              console.log(parsed["characters"][i]);
                               checkCharacter(parsed["characters"][i]);
                            }
                            // check students 
@@ -112,15 +111,15 @@
 
         function createMarker(character, image)
         {
-                var loc = new google.maps.LatLng(character.loc["latitude"], character.loc["longitude"]);
-                var marker = new google.maps.Marker({
+                var loc = new google.maps.LatLng(character["loc"]["latitude"], character["loc"]["longitude"]);
+                var newMarker = new google.maps.Marker({
                         map: map,
                         position: loc,
                         icon: image
                 });
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(newMarker, 'click', function() {
                         infowindow.close();
-                        infowindow.setContent("Name: " + character.name + "<p> Lat: " + character.loc["latitude"] + "</p> <p> Lng: " + character.loc["longitude"] + "</p> <p> Note: " + character.note + "</p>");
+                        infowindow.setContent("Name: " + character["name"] + "<p> Lat: " + character["loc"]["latitude"] + "</p> <p> Lng: " + character["loc"]["longitude"] + "</p> <p> Note: " + character["note"] + "</p>");
                         infowindow.open(map, this);
                         });
         }

@@ -63,7 +63,7 @@
                 marker.setMap(map);
                 // Open info window on click of marker
                 google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent(marker.title);
+                        infowindow.setContent("<p> Login: " + title + "</p> <p> Lat: " + myLat + "</p> <p> Lng: " + myLng + "</p>");
                         infowindow.open(map, marker);
                 });
 
@@ -77,12 +77,21 @@
                            //check characters
                            for (i = 0; i < parsed["characters"].length; i++){
                               checkCharacter(parsed["characters"][i]);
+                              // Draw polylines to characters
+                              var flightPathCoords = [me, new google.maps.LatLng(parsed["characters"][i]["loc"]["latitude"], parsed["characters"][i]["loc"]["longitude"])];
+                              var flightPath = new google.maps.Polyline({
+                                 path: flightPathCoords,
+                                 geodesic: true,
+                                 strokeColor: "#FF0000",
+                                 strokeOpacity: 1.0,
+                                 strokeWeight: 2
+                              });
+                              flightPath.setMap(map);
                            }
                            // check students 
                            for (i = 0; i < parsed["students"].length; i++){
                               createStudentMarker(parsed["students"][i]);
                            }
-                           // need to JSON parse through data and then take info to add markers
                      }
                 };
                 xhr.send("login=WendyTestaburger&lat="+myLat+"&lng="+myLng);

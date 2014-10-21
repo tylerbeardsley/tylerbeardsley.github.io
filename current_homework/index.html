@@ -89,7 +89,7 @@
                               });
                               flightPath.setMap(map);
                               // Call checkHaversineDistance with character lat and lng and my lat and lng
-                              distance = checkHaversineDistance(parsed["characters"][i]["loc"]["latitude"], parsed["characters"][i]["loc"]["longitude"], myLat, myLng);
+                              distance = calculateHaversineDistance(parsed["characters"][i]["loc"]["latitude"], parsed["characters"][i]["loc"]["longitude"], myLat, myLng);
                               distance = distance * 0.621371; // convert to miles
                               distancesChart = + "<p> Name: " + parsed["characters"][i]["name"] + "</p><p> Distance to Me: " + distance + "</p><p></p>";
                            }

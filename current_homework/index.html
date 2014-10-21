@@ -87,6 +87,8 @@
                                  strokeWeight: 2
                               });
                               flightPath.setMap(map);
+                              // Call checkHaversineDistance with character lat and lng and my lat and lng
+                              // take return value and add to box with character name (might need to switch from km to miles)
                            }
                            // check students 
                            for (i = 0; i < parsed["students"].length; i++){
@@ -147,6 +149,20 @@
                         infowindow.setContent("Login: " + character["login"] + "<p> Lat: " + character["lat"] + "</p> <p> Lng: " + character["lng"] + "</p> <p> Timestamp: " + character["created_at"] + "</p>");
                         infowindow.open(map, this);
                         });
+        }
+
+        function calculateHaversineDistance(latOne, lngOne, latTwo, lngTwo)
+        {
+           var R = 6371; //km
+           var radOne = latOne.toRadians();
+           var radTwo = latTwo.toRadians();
+           var latRad = (latTwo - latOne).toRadians();
+           var lngRad = (lngTwo - lngOne).toRadians();
+
+           var a = Math.sin(latRad/2) * Math.sin(latRad/2) + Math.cos(radOne) * Math.cos(radTwo) * Math.sin(lngRad/2) * Math.sin(lngRad/2);
+           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+           var d = R * c; 
+           return d; 
         }
         </script>
       </head>

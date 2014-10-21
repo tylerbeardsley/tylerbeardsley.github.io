@@ -156,13 +156,18 @@
                         });
         }
 
+        function toRadians() 
+        {
+           return this * Math.PI / 180;
+        }
+
         function calculateHaversineDistance(latOne, lngOne, latTwo, lngTwo)
         {
            var R = 6371; //km
-           var radOne = Math.toRadians(latOne);
-           var radTwo = Math.toRadians(latTwo);
-           var latRad = Math.toRadians(latTwo - latOne);
-           var lngRad = Math.toRadians(lngTwo - lngOne);
+           var radOne = latOne.toRadians();
+           var radTwo = latTwo.toRadians();
+           var latRad = (latTwo - latOne).toRadians();
+           var lngRad = (lngTwo - lngOne).toRadians();
 
            var a = Math.sin(latRad/2) * Math.sin(latRad/2) + Math.cos(radOne) * Math.cos(radTwo) * Math.sin(lngRad/2) * Math.sin(lngRad/2);
            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));

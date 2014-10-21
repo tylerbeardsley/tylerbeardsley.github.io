@@ -27,6 +27,7 @@
         var snape = "snape.png";
         var waldo = "waldo.png";
         var infowindow = new google.maps.InfoWindow();
+        var myWindow = new google.maps.InfoWindow();
         var places;
         var data;
         var parsed;
@@ -65,9 +66,9 @@
                 marker.setMap(map);
                 // Open info window on click of marker
                 google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.close();
-                        infowindow.setContent("<p> Login: " + title + "</p> <p> Lat: " + myLat + "</p> <p> Lng: " + myLng + "</p>");
-                        infowindow.open(map, this);
+                        myWindow.close();
+                        myWindow.setContent("<p> Login: " + title + "</p> <p> Lat: " + myLat + "</p> <p> Lng: " + myLng + "</p>");
+                        myWindow.open(map, this);
                 });
 
                 // Send info to herokuapp

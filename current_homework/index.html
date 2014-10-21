@@ -68,7 +68,7 @@
                 google.maps.event.addListener(marker, 'click', function() {
                         myWindow.close();
                         myWindow.setContent("<p> Login: " + title + "</p> <p> Lat: " + myLat + "</p> <p> Lng: " + myLng + "</p>");
-                        myWindow.open(map, this);
+                        myWindow.open(map, marker);
                 });
 
                 // Send info to herokuapp

@@ -64,6 +64,7 @@
                 marker.setMap(map);
                 // Open info window on click of marker
                 google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.close();
                         infowindow.setContent("<p> Login: " + title + "</p> <p> Lat: " + myLat + "</p> <p> Lng: " + myLng + "</p>");
                         infowindow.open(map, marker);
                 });

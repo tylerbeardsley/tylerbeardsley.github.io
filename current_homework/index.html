@@ -88,7 +88,7 @@
                                  strokeWeight: 2
                               });
                               flightPath.setMap(map);
-                              // Call checkHaversineDistance with character lat and lng and my lat and lng
+                              // Call calculateHaversineDistance with character lat and lng and my lat and lng
                               distance = calculateHaversineDistance(parsed["characters"][i]["loc"]["latitude"], parsed["characters"][i]["loc"]["longitude"], myLat, myLng);
                               distance = distance * 0.621371; // convert to miles
                               distancesChart = + "<p> Name: " + parsed["characters"][i]["name"] + "</p><p> Distance to Me: " + distance + "</p><p></p>";
@@ -159,10 +159,10 @@
         function calculateHaversineDistance(latOne, lngOne, latTwo, lngTwo)
         {
            var R = 6371; //km
-           var radOne = latOne.toRadians();
-           var radTwo = latTwo.toRadians();
-           var latRad = (latTwo - latOne).toRadians();
-           var lngRad = (lngTwo - lngOne).toRadians();
+           var radOne = Math.toRadians(latOne);
+           var radTwo = Math.toRadians(latTwo);
+           var latRad = Math.toRadians(latTwo - latOne);
+           var lngRad = Math.toRadians(lngTwo - lngOne);
 
            var a = Math.sin(latRad/2) * Math.sin(latRad/2) + Math.cos(radOne) * Math.cos(radTwo) * Math.sin(lngRad/2) * Math.sin(lngRad/2);
            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));

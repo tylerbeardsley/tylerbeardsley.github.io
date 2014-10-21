@@ -164,10 +164,10 @@
         function calculateHaversineDistance(latOne, lngOne, latTwo, lngTwo)
         {
            var R = 6371; //km
-           var radOne = latOne.toRadians();
-           var radTwo = latTwo.toRadians();
-           var latRad = (latTwo - latOne).toRadians();
-           var lngRad = (lngTwo - lngOne).toRadians();
+           var radOne = latOne * Math.PI / 180;
+           var radTwo = latTwo * Math.PI / 180;
+           var latRad = (latTwo - latOne) * Math.PI / 180;
+           var lngRad = (lngTwo - lngOne) * Math.PI / 180;
 
            var a = Math.sin(latRad/2) * Math.sin(latRad/2) + Math.cos(radOne) * Math.cos(radTwo) * Math.sin(lngRad/2) * Math.sin(lngRad/2);
            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));

@@ -7,6 +7,12 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
             // Most of your work will be done here...
+            $(document).ready(function(){
+               var message = $("#msg");
+               $("news").prepend("<p>" + message + "</p>");
+               localStorage[new Date().getTime()] = message;
+            });
+            var message = document.getElementById("msg");
         </script>
 </head>
 

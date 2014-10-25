@@ -8,17 +8,16 @@
         <script>
             // Most of your work will be done here...
             $(document).ready(function(){
-               var message = $("#msg");
-               $("news").prepend("<p>" + message + "</p>");
+               var message = $("#msg").val();
+               $("div#news").prepend("<p>" + message + "</p>");
                localStorage[new Date().getTime()] = message;
             });
-            var message = document.getElementById("msg");
         </script>
 </head>
 
 <body>
         <h1>My News Feed</h1>
-        <h3>My news update: <input type="text" id="msg" name="msg" size="30" /></h3>
+        <h3>My news update: <input type="text" id="msg" name="msg" value="submit" size="30" /></h3>
         <div id="news">News...</div>
 </body>
 </html>

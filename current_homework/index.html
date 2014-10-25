@@ -8,16 +8,20 @@
         <script>
             // Most of your work will be done here...
             $(document).ready(function(){
-               var message = $("#msg").val();
-               $("div#news").prepend("<p>" + message + "</p>");
-               localStorage[new Date().getTime()] = message;
+               $("#msg").keyup(function(event){
+                  if(event.keyCode == 13){
+                     var message = $("#msg").val();
+                     $("div#news").prepend("<p>" + message + "</p>");
+                     localStorage[new Date().getTime()] = message;
+                  }
+               });
             });
         </script>
 </head>
 
 <body>
         <h1>My News Feed</h1>
-        <h3>My news update: <input type="text" id="msg" name="msg" value="submit" size="30" /></h3>
+        <h3>My news update: <input type="text" id="msg" name="msg" value="" size="30" /></h3>
         <div id="news">News...</div>
 </body>
 </html>

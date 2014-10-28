@@ -8,11 +8,14 @@
         <script>
             // Most of your work will be done here...
             $(document).ready(function(){
+               for (var key in localStorage){
+                  $("div#news").prepend("<p>" + localStorage.getItem(key) + "</p>");
+               }
                $("#msg").keyup(function(event){
                   if(event.keyCode == 13){
-                     var message = $("#msg").val();
                      var currentDate = new Date();
-                     $("div#news").prepend("<p>" + currentDate + " - " + message + "</p>");
+                     var message = "" + currentDate + " - " + $("#msg").val();
+                     $("div#news").prepend("<p>" + message + "</p>");
                      localStorage[currentDate] = message;
                   }
                });

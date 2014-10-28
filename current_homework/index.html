@@ -11,8 +11,9 @@
                $("#msg").keyup(function(event){
                   if(event.keyCode == 13){
                      var message = $("#msg").val();
-                     $("div#news").prepend("<p>" + message + "</p>");
-                     localStorage[new Date().getTime()] = message;
+                     var currentDate = new Date();
+                     $("div#news").prepend("<p>" + currentDate + " - " + message + "</p>");
+                     localStorage[currentDate] = message;
                   }
                });
             });
@@ -22,7 +23,6 @@
 <body>
         <h1>My News Feed</h1>
         <h3>My news update: <input type="text" id="msg" name="msg" value="" size="30" /></h3>
-        <p>News...<p>
-        <div id="news"></div>
+        <div id="news">News...</div>
 </body>
 </html>

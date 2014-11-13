@@ -1,31 +1,18 @@
 <!DOCTYPE html>
-
 <html>
+        <head>
+                <title>Fitness Finder</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+                <script type="text/javascript"
+                         src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=places">
+                </script>
+                <script type="text/javascript" src="fitness_map_set.js">
+                </script>
+                <link rel="stylesheet" href="styling/custom.css"/>
+        </head>
 
-<head>
-        <title>My News Feed</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            // Most of your work will be done here...
-            $(document).ready(function(){
-               for (var key in window.localStorage){
-                  $("div#news").prepend("<p>" + localStorage.getItem(key) + "</p>");
-               }
-               $("#msg").keyup(function(event){
-                  if(event.keyCode == 13){
-                     var currentDate = new Date();
-                     var message = "" + currentDate + " - " + $("#msg").val();
-                     $("div#news").prepend("<p>" + message + "</p>");
-                     localStorage[currentDate] = message;
-                  }
-               });
-            });
-        </script>
-</head>
-
-<body>
-        <h1>My News Feed</h1>
-        <h3>My news update: <input type="text" id="msg" name="msg" value="" size="30" /></h3>
-        <div id="news">News...</div>
-</body>
+        <body onload="init()">
+                <div id="map_canvas"></div>
+        </body>
 </html>
